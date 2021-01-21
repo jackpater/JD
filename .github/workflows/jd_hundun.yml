@@ -1,16 +1,13 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: jd_rankingList
+name: jd_hundun
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '11 18 * * *'
+    - cron: '0 15,16 * * *'
   watch:
     types: started
   repository_dispatch:
-    types: jd_rankingList
+    types: jd_hundun
 jobs:
   build:
 
@@ -20,7 +17,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          repository: hajiuhajiu/jdsign1112
+          repository: x1iu/bbaase
+          ref: 'main'
+          token: ${{ secrets.PAT }}
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -35,16 +34,12 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: '运行 【京东排行榜】'
+      - name: '运行hundun脚本'
         run: |
-          random_time=$(($RANDOM % 10))
-          echo "等待 ${random_time} 分钟后开始执行"
-          for((i=1; i<=${random_time}; i++));  
-          do
-            echo "倒计时 $[${random_time}-$i] 分钟"
-            sleep 1m
-          done
-          node jd_rankingList.js
+          curl https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_factory.js -o my_run.js
+          node my_run.js
+          curl https://raw.githubusercontent.com/whyour/hundun/master/quanx/jdzz.js -o my_run.js
+          node my_run.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
