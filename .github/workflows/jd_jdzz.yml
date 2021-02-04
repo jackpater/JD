@@ -6,7 +6,7 @@ name: jd_zz赚赚
 on:
   workflow_dispatch:
   schedule:
-    - cron: '08 6,13 * * *'
+    - cron: '08 7,13,17 * * *'
   watch:
     types: started
   repository_dispatch:
